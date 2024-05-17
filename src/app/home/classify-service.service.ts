@@ -10,7 +10,7 @@ export class ClassifyServiceService {
    
   private apiUrl = 'https://kyc-sb.trackwizz.app/api/classify/';
   private authToken = 'eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGkiOjIsInNjcCI6WyJjbGFzc2lmeSJdLCJpLWVudiI6InNhbmRib3giLCJpc3MiOiJUcmFja1dpenpDb25uZWN0IiwiaWF0IjoxNzEyNTc5MDM0LCJleHAiOjE3NDQxMTUwMzR9.XmrJWq3Y721nQ7qfjfPimVyLobOQzayuPeR3lEimLHWn_CavC0CA0FKhCYRzfSJB7b_6NVbgDuAptuPkk4sJFA';   
-  private temp='test'
+
   imageData : ClassifyRequest ;  
 
   constructor(private http: HttpClient) { }
