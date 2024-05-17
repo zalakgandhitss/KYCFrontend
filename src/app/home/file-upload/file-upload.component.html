@@ -1,0 +1,88 @@
+<h2 #heading>Onboarding</h2>
+<div class="container">
+  <div class="document-section">
+    <div class="document-title">Pancard</div>
+    <button class="webcam-toggle-btn" (click)="toggleWebcam(1)">
+      {{ showWebcam1 ? 'Close Camera' : 'Open Camera' }}
+    </button>
+    <video *ngIf="showWebcam1" class="video-element" #videoElement></video>
+    <button  (click)="toggleWebcam(1,true)" *ngIf="showWebcam1"><img class="flip-cam" src="../../../assets/cam-flip.png"></button>
+    <button class="capture-btn" (click)="captureImage(1)" *ngIf="showWebcam1"><div class="camera-icon" ></div></button>
+    <img *ngIf="webcamImage1" class="captured-image" [src]="webcamImage1?.imageAsDataUrl" alt="Captured Image">
+    <div id="Panresponse">
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="document-section">
+    <div class="document-title">Proof of Address</div>
+    <div>
+      <div class="upload-section">
+        <select [(ngModel)]="selectedDocument" id="AddressProof" class="document-type">
+          <option value="" disabled>Select Document</option>
+          <option  value="AadharCard">Aadharcard</option>
+          <option value="passport">Passport</option>
+          <option value="driverLicense">Driver's License</option>
+          <option value="VoteridCard">VoterID Card</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <div class="AddressProof" *ngIf="selectedDocument">
+        <div class="address">
+        <button class="webcam-toggle-btn" (click)="toggleWebcam(2)">
+          {{ showWebcam2 ? 'Close Camera' : 'Capture Frontside' }}
+        </button>
+        <video *ngIf="showWebcam2" class="video-element" #videoElement></video>
+        <button class="capture-btn" (click)="captureImage(2)" *ngIf="showWebcam2"><div class="camera-icon" ></div></button>
+        <img *ngIf="webcamImage2" class="captured-image" [src]="webcamImage2?.imageAsDataUrl" alt="Captured Image">
+        <div id="AddressResponse"></div> 
+      </div>
+      <div class="address">
+        <button class="webcam-toggle-btn" (click)="toggleWebcam(5)">
+          {{ showWebcam2 ? 'Close Camera' : 'Capture Backside' }}
+        </button>
+        <video *ngIf="showWebcam5" class="video-element" #videoElement></video>
+        <button class="capture-btn" (click)="captureImage(5)" *ngIf="showWebcam5"><div class="camera-icon" ></div></button>
+        <img *ngIf="webcamImage5" class="captured-image" [src]="webcamImage5?.imageAsDataUrl" alt="Captured Image">
+        <div id="AddressResponse2"></div> 
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="document-section">
+    <div class="document-title">Wet Signature</div>
+    <div>
+      <button class="webcam-toggle-btn" (click)="toggleWebcam(3)">
+        {{ showWebcam3 ? 'Close Camera' : 'Open Camera' }}
+      </button>
+      <video *ngIf="showWebcam3" class="video-element" #videoElement></video>
+      <button class="capture-btn" (click)="captureImage(3)" *ngIf="showWebcam3"><div class="camera-icon" ></div></button>
+      <div *ngIf="webcamImage3">
+        <img class="captured-image" [src]="webcamImage3?.imageAsDataUrl" alt="Captured Image">
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+
+  <div class="document-section">
+    <div class="document-title">Selfie</div>
+    <div>
+      <button class="webcam-toggle-btn" (click)="toggleWebcam(4)">
+        {{ showWebcam4 ? 'Close Camera' : 'Open Camera' }}
+      </button>
+      <video *ngIf="showWebcam4" class="video-element" #videoElement></video>
+      <button class="capture-btn" (click)="captureImage(4)" *ngIf="showWebcam4"><div class="camera-icon" ></div></button>
+      
+      <div *ngIf="webcamImage4">
+        <img class="captured-image" [src]="webcamImage4?.imageAsDataUrl" alt="Captured Image">
+      </div>
+    </div>
+  </div>
+</div>
