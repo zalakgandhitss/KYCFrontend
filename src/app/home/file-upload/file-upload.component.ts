@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angula
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { ClassifyServiceService } from '../classify-service.service';
 import { ClassifyRequest, ClassifyResponce, ILoaction } from '../classify-DTO';
-import { response } from 'express';
+
 
 
 @Component({
@@ -32,6 +32,11 @@ export class FileUploadComponent implements OnInit {
 
   @ViewChild('videoElement') videoElement: ElementRef; 
 
+  public flipview:boolean = false; 
+  public pancardcontainer:boolean = true; 
+  public addressproofcontainer:boolean = true;
+  public wetsigncontainer:boolean = true; 
+  public selfiecontainer:boolean = true; 
 
   public showWebcam1 = false;
   public showWebcam2 = false;
@@ -39,7 +44,7 @@ export class FileUploadComponent implements OnInit {
   public showWebcam4 = false;
   public showWebcam5 = false;
 
-  public  webcamImage1 = null;
+  public webcamImage1 = null;
   public webcamImage2 = null;
   public webcamImage3 = null;
   public webcamImage4 = null; 
@@ -49,27 +54,56 @@ export class FileUploadComponent implements OnInit {
   public backimage  = null; 
   public camselect:number = 0; 
 
+
+
   public success = null;
   CurrentLocation:ILoaction = {
     latitude:"",
     longitude:""
   }
+
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.showPosition);
+    
+      navigator.geolocation.getCurrentPosition(
+        position => this.showPosition(position),
+        error => this.handleError(error)
+      );
     } else { 
-      alert("Geolocation is not supported by this browser.");  
+      alert("Geolocation is not supported by this browser."); 
+      
     }
   }
 
   showPosition = (position) => {
     this.CurrentLocation.latitude = position.coords.latitude;
     this.CurrentLocation.longitude = position.coords.longitude;
+   
     console.log(this.CurrentLocation);
+  } 
+
+  handleError(error: GeolocationPositionError) {
+    if (error.code === error.PERMISSION_DENIED) {
+      alert('Location permission is required for this functionality.');
+     this.getLocation();
+    } 
   }
 
-  public toggleWebcam(i:number,selectcam?:boolean): void { 
-     
+   public backbutton(i:number){
+    this.flipview = false;
+    this.toggleWebcam(i);
+   } 
+
+   public funcOnchange(){
+    document.getElementById("AddressResponse").innerHTML=""; 
+    document.getElementById("AddressResponse2").innerHTML=""; 
+    this.showWebcam2=false; 
+    this.showWebcam5=false; 
+    this.webcamImage2=null; 
+    this.webcamImage5=null;
+   } 
+
+  public async toggleWebcam(i:number,selectcam?:boolean) { 
     if(!selectcam){
 
     if(i==1)
@@ -86,27 +120,37 @@ export class FileUploadComponent implements OnInit {
 
     if(i==5)
     this.showWebcam5=!this.showWebcam5; 
-    }
+
+   // document.getElementById("background_black").style.display="block";
+  }
     else{
-     // this.camselect = !this.camselect; 
-     this.toggleWebcam(1,false);
-     if(this.camselect==0){this.camselect=1}
-       else {this.camselect=0} 
-       this.toggleWebcam(1,false);
+     if(this.camselect==0){
+      this.camselect=1;  
+      this.flipview=true; 
+     this.toggleWebcam(i); 
+     await setTimeout(() => {
+       this.toggleWebcam(i);
+     }, 10);
+       }
+       else {this.camselect=0 ; 
+        this.flipview=true; 
+       this.toggleWebcam(i); 
+     await setTimeout(() => {
+       this.toggleWebcam(i);
+     }, 10);
+      } 
+  
       console.log(this.camselect);
     }
 
     if (this.showWebcam1 || this.showWebcam2 || this.showWebcam3 || this.showWebcam4 || this.showWebcam5) { 
-    
-      console.log(Number(this.camselect));
-
       WebcamUtil.getAvailableVideoInputs()
         .then((mediaDevices: MediaDeviceInfo[]) => {
           if (mediaDevices && mediaDevices.length > 0) {
             navigator.mediaDevices.getUserMedia({ 
                
                 video: {
-                  deviceId: mediaDevices[1].deviceId // Select the first available camera
+                  deviceId: mediaDevices[this.camselect].deviceId 
                 }
             })
             .then((stream: MediaStream) => {
@@ -128,12 +172,14 @@ export class FileUploadComponent implements OnInit {
   }
     
   
-  public captureImage(i:number): void {
+  public captureImage(i:number) {
+    this.flipview = false;
     const canvas = document.createElement('canvas');
     canvas.width = this.videoElement.nativeElement.videoWidth;
     canvas.height = this.videoElement.nativeElement.videoHeight;
     canvas.getContext('2d').drawImage(this.videoElement.nativeElement, 0, 0);
-    if(i===1){
+    if(i===1){ 
+      document.getElementById("Panresponse").innerHTML=""; 
       this.webcamImage1 = {
         imageAsDataUrl: canvas.toDataURL('image/jpeg')
       };     
@@ -147,7 +193,8 @@ export class FileUploadComponent implements OnInit {
       console.log("toggle");
     } 
 
-    if(i===2){
+    if(i===2){ 
+      document.getElementById("AddressResponse").innerHTML="";
     this.webcamImage2 = {
       imageAsDataUrl: canvas.toDataURL('image/jpeg')
     }; 
@@ -169,6 +216,7 @@ export class FileUploadComponent implements OnInit {
   } 
 
   if(i==5){
+    document.getElementById("AddressResponse2").innerHTML="";
     this.webcamImage5 = {
       imageAsDataUrl: canvas.toDataURL('image/jpeg')
     }; 
@@ -254,29 +302,28 @@ export class FileUploadComponent implements OnInit {
     }
     else{
       res = document.getElementById("AddressResponse2") as HTMLDivElement; 
-      console.log("else ok"); 
     } 
     res.innerText = "" 
         if(response.data.ovdType == "AadhaarRegular"){
           console.log(this.success); 
           res.style.color = "green";
-          res.innerText = "Adharcard vairifed!" ;
+          res.innerText = "Aadharcard verified!" ;
         }
         else if(response.data.ovdType == "AadhaarFront" ){
                 console.log("only AdharcardFront"); 
-                res.style.color = "red";
-                res.innerText = "Only Adharcard front page detected please upload again with both page"; 
+                res.style.color = "green";
+                res.innerText = "Aadharcard front page detected"; 
         }
         else if(response.data.ovdType == "AadhaarBack"){
           console.log("only AdharcardBack"); 
-          res.style.color = "red";
-          res.innerText = "Only Adharcard back page detected please upload again with both page" 
+          res.style.color = "green";
+          res.innerText = "Aadharcard back page detected" ;
         }
       
         else{
-          this.success = "Is not a Adharcard";
+          this.success = "Is not a Aadharcard";
           res.style.color = "red";
-          res.innerText = "Adharcard could not be verified!" 
+          res.innerText = "Aadharcard could not be verified!" ;
           console.log(this.success);
          }
   } 
@@ -299,12 +346,12 @@ export class FileUploadComponent implements OnInit {
         else if(response.data.ovdType == "PassportFirst" ){
                 console.log("only PassportFirst"); 
                 res.style.color = "red";
-                res.innerText = "Only Passport front page detected please upload again with both page!";  
+                res.innerText = "Passport front page detected";  
         }
         else if(response.data.ovdType == "PassportLast"){
-          console.log("only AdharcardBack"); 
+          console.log("only PassportBack"); 
           res.style.color = "red";
-          res.innerText = "Only Passport last page detected please upload again with both page!" ;
+          res.innerText = "Passport last page detected" ;
         }
       
         else{
@@ -327,10 +374,9 @@ export class FileUploadComponent implements OnInit {
         if(response.data.ovdType == "DrivingLicense"){
           console.log(this.success); 
           res.style.color = "green";
-          res.innerText = "Driving License verified!" ;
+          res.innerText = "Driving License verified!";
         }
         else if(response.data.ovdType == "DrivingLicenseOld" ){
-                console.log("only PassportFirst"); 
                 res.style.color = "red";
                 res.innerText = "Driving License Old!";  
         }
@@ -358,13 +404,13 @@ export class FileUploadComponent implements OnInit {
         }
         else if(response.data.ovdType == "VoterCardFront" ){
                 console.log("only VoterCardFront"); 
-                res.style.color = "red";
-                res.innerText = "Only VoterCard front page detected please upload again with both page!";  
+                res.style.color = "green";
+                res.innerText = "VoterCard front page detected";  
         }
         else if(response.data.ovdType == "VoterCardBack"){
           console.log("only AdharcardBack"); 
-          res.style.color = "red";
-          res.innerText = "Only Votercard back page detected please upload again with both page!" ;
+          res.style.color = "green";
+          res.innerText = "Votercard back page detected" ;
         }
       
         else{
