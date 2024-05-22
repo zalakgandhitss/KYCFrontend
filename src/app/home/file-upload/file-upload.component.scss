@@ -1,195 +1,202 @@
-
-
 img {
-    max-width: 180px;
-    max-height: 150px; 
-    display: block; 
-    margin-top: 10px; 
-  }  
+  max-width: 180px;
+  max-height: 150px; 
+  display: block; 
+  margin-top: 10px; 
+}  
+h3 {
+  text-align: center;
+}
+.upload-section {
+  margin-bottom: 20px;
+}
+.upload-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
-  
-  h3 {
-    text-align: center;
-  }
-  
-  .upload-section {
-    margin-bottom: 20px;
-  }
-  
- 
-  
-  .upload-btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .document-type {
-    width: auto;
-    padding: 10px 25px 10px 15px ;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: #fff;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="%23999" stroke-width="2" d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 16px;
-    appearance: none;
-    cursor: pointer;
-    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
-  }
-  
-  .document-type:hover {
-    border-color: #888;
-  }
-  
-  .document-type:focus {
-    border-color: #344a61;
-    box-shadow: 0 0 0 3px rgba(51, 68, 87, 0.25);
-    outline: none;
-    background-color: #c7dfd8;
-  }
-  
-  .preview {
-    margin-top: 10px;
-  }
-  
-  .preview h4 {
-    margin-bottom: 5px;
-  }
-  
-  .preview img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
-   
-  .headername{
-    font-size: 20px;
-    font-weight: 600;
-    color: brown;
-  }
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-  }
-  @media (max-width:800px) {
-    .container{
-      margin: 0 10px;
-    }
-  }
-  .document-section {
-    margin-bottom: 20px;
-  }
-  
-  .document-title {
-    font-size: 24px;
-    font-weight: bold;
+.document-type {
+  width: auto;
+  padding: 10px 25px 10px 15px ;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="%23999" stroke-width="2" d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.document-type:hover {
+  border-color: #888;
+}
+
+.document-type:focus {
+  border-color: #344a61;
+  box-shadow: 0 0 0 3px rgba(51, 68, 87, 0.25);
+  outline: none;
+  background-color: #c7dfd8;
+}
+
+      
+.headername{
+  font-size: 20px;
+  font-weight: 600;
+  color: brown;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 1px 1px 2px #344a61;
+}
+@media (max-width:800px) {
+  .container{
+    margin: 0 10px;
     margin-bottom: 10px;
   }
-  
-  .webcam-toggle-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #3f9c7d;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .webcam-toggle-btn:hover {
-    background-color: #386453;
-  }
-  
-  .video-element {
-    margin-bottom: 10px;
-    width: 100%;
-  
-  }
-  
-  .capture-btn {
-    padding: 7px 7px;
-    border: none;
-    border-radius: 60px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    position:fixed;
-    right: 45%;
-    bottom: 5%;
-    z-index: 5;
-  }
-  
-  .captured-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .upload-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #f44336;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .upload-btn:hover {
-    background-color: #d32f2f;
-  }
-  h2{
-    text-align: center;
-    background-color: #383838bb;
-    color: white;
-    padding: 20px 0px; 
-    margin-bottom: 20px;
-  }
-  .video-element{
-    position:fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: black;
-  }
- 
-  .camera-icon {
-    width: 40px;
-    height: 40px;
-    background: url('../../../assets/New-Camera-icon.png') center/contain no-repeat;
-    cursor: pointer; 
-  }
-   .camera-icon:active{
-    filter: invert(1);
-   }
+}
+.document-section {
+  margin-bottom: 20px;
+}
 
-  .AddressProof{
-    display: flex;
-    flex-direction:column;
-  }
+.document-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-  .address{
-     margin: 10px;
-  } 
+.webcam-toggle-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #49a184;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 
-  .flip-cam{
-    position: fixed; 
-    right: 5%;
-    top: 5%;
-    filter: invert(1);
-    width: 40px ;
-    height: 40px;
-  }
+}
+
+.webcam-toggle-btn:hover {
+  background-color: #386453;
+}
+
+.video-element {
+  margin-bottom: 10px;
+  width: 100%;
+  z-index: 10;
+}
+
+.capture-btn {
+  padding: 7px 7px;
+  border: none;
+  border-radius: 60px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  position:fixed;
+  right: 42%;
+  bottom: 5%;
+  z-index: 11;
+}
+
+.captured-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.upload-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f44336;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.upload-btn:hover {
+  background-color: #d32f2f;
+}
+h2{
+  text-align: center;
+  background-color: #000000bb;
+  color: white;
+  padding: 20px 0px; 
+  margin-bottom: 20px;
+}
+.video-element{
+  position:fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: black;
+}
+
+.camera-icon {
+  width: 40px;
+  height: 40px;
+  background: url('../../../assets/New-Camera-icon.png') center/contain no-repeat;
+  cursor: pointer; 
+}
+ .camera-icon:active{
+  filter: invert(1);
+ }
+
+.AddressProof{
+  display: flex;
+  flex-direction:column;
+}
+
+.address{
+   margin: 10px;
+} 
+
+.flip-cam{
+  position: fixed; 
+  right: 12%;
+  bottom: 6.5%;
+  filter: invert(1);
+  width: 30px ;
+  height: 30px;
+  border-radius: 40px;
+  z-index: 13;
+}
+.flip-cam:active{
+filter: drop-shadow(0px 0px 2px white);
+}
+#background_black{
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background-color: black;
+z-index: 9;
+color: white;
+}
+
+.backbutton{
+position: fixed;
+top:2% ;
+right: 5%; 
+background: none;
+z-index: 12;
+width: 30px; 
+height: auto;
+filter: invert(1);
+}
